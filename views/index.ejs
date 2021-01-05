@@ -1,0 +1,49 @@
+<%- include('header.ejs') %>
+<div class="container">
+<h1>Readers data</h1>
+
+<div class="readers">
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Hash Token</th>
+                <th>Block list</th>
+                <th>Action</th>
+            </tr>
+            <!-- Loop through readers -->
+            <% for(var i = 0; i < readers.length; i++) {%>
+            <tr>
+                <td><%= readers[i].name %></td>
+                <td><%= readers[i].hash_token %></td>
+                <td><%= readers[i].block_list %></td>
+                <td>
+                    <a href="<%= `/readers/delete/${readers[i].id}` %>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+</div>
+
+<h3>Add new reader</h3>
+<form method="POST" action ="/reader">
+    <div class="container">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name"> 
+        <label for="hash_token">Hash Token</label>
+        <input type="text" id="hash_token" name="hash_token" >    
+        <label for="block_list">Block List</label>
+        <input type="checkbox" id="block_list" name="block_list" > 
+    </div>
+    <div class="form-group"> 
+        <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+<%- include('footer.ejs') %>
