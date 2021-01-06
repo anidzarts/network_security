@@ -1,19 +1,40 @@
 
-# self-monitor
+# Deployment 
 
-The app is available at https://self-monitor3000.herokuapp.com/
+The app is available at https://network-security-aalto.herokuapp.com
 
-## Getting started
+# Database
 
-**Create a database in whatever way is more suitable for you** e.g. Docker, ElephantSQL, PostgeSQL running locally on your machine, etc. all will work just fine. Below I'll show steps for setting up a DB with Docker, **but please feel free to use a method of your choice.**
-## Running the application
+The database was created in ElephantSQL.
+Run the following SQL commands to create the required tables and indices.
 
-To run the application you should use the following command in the location of the app.js file
+```sql
+CREATE TABLE readers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(320) NOT NULL,
+  hash_token VARCHAR(320) NOT NULL,
+  block_list boolean 
+);
+
+
+CREATE TABLE cards(
+  id serial primary key,
+  name VARCHAR(320) NOT NULL,
+  issue_token VARCHAR(320) NOT NULL,
+  valid_token VARCHAR(320) NOT NULL,
+  block_list boolean 
+);
+```
+
+
+## Running the application locally
+
+Start the app locally by running the following command from the root directory of the project
 
 ```shell
 deno run --allow-all --allow-env --unstable app.js
 ```
 
-After it you can test the aplication opening  the following link in a browser:
+After it you can test the aplication opening the following link in a browser:
 
 **localhost:7777**
