@@ -1,7 +1,7 @@
 let config = {};
 
-if (Deno.env.get('DATABASE_URL')) {
-  config.database = Deno.env.get('DATABASE_URL');
+if (Deno.env.get('new')) {
+  config.database = Deno.env.get('new');
 } else {
   config.database = {
     hostname: "dumbo.db.elephantsql.com",
@@ -17,5 +17,3 @@ if (Deno.args.length > 0) {
   port = Number(lastArgument);
 }
 export { config }; 
-
-
