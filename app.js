@@ -1,8 +1,8 @@
-import { Application } from "./deps.js";
+import { Application, Session, oakCors } from "./deps.js";
 import { router } from "./routes/routes.js";
 import * as middleware from './middlewares/middlewares.js';
 import { viewEngine, engineFactory, adapterFactory } from "./deps.js";
-import { Session } from "./deps.js";
+
 
 const app = new Application();
 
@@ -32,10 +32,17 @@ app.use(middleware.errorMiddleware);
 app.use(middleware.requestTimingMiddleware);
 app.use(middleware.serveStaticFilesMiddleware);
 
+
+app.use(oakCors());
 app.use(router.routes());
 
-if (!Deno.env.get('TEST_ENVIRONMENT')) {
-  app.listen({ port: 7777 });
+
+let port = 7777;
+if (Deno.args.length > 0) {
+    const lastArgument = Deno.args[Deno.args.length - 1];
+    port = Number(lastArgument);
 }
-  
+app.listen({port: port});
+
+
 export default app;
