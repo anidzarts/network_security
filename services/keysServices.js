@@ -28,6 +28,21 @@ const getSigningKey = async(id) => {
     }
 }
 
+
+const getValidSigningKey = async(id) => {
+    //TODO check with id that the reader isnt blocked
+    const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
+    if (isBlocked && isBlocked.rowCount >0 && !isBlocked[0]) 
+    {
+
+        const res = await executeQuery("SELECT valid_signing FROM keys");
+        if (!res) {
+            return [];
+        }
+        return res.rowsOfObjects()[0];
+    }
+}
+
 const cardsCheckBlock = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM cards WHERE name = $1", id);
@@ -62,4 +77,4 @@ const changeItem = async(name) => {
     }
 }
 
-export { getAuthKey, getSigningKey, changeItem, readersCheckBlock, cardsCheckBlock};
+export { getAuthKey, getSigningKey, changeItem, readersCheckBlock, cardsCheckBlock, getValidSigningKey};
