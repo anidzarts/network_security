@@ -20,16 +20,16 @@ CREATE TABLE readers (
 CREATE TABLE cards(
   id serial primary key,
   name VARCHAR(320) NOT NULL,
-  issue_token VARCHAR(320) NOT NULL,
-  valid_token VARCHAR(320) NOT NULL,
+  issue_token VARCHAR(320),
+  valid_token VARCHAR(320),
   block_list boolean 
 );
-
 
 CREATE TABLE keys(
   id serial primary key,
   authentication VARCHAR(320) NOT NULL,
-  signing VARCHAR(320) NOT NULL
+  signing VARCHAR(320) NOT NULL,
+  valid_signing VARCHAR(320) 
 );
 ```
 
