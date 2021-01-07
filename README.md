@@ -24,6 +24,13 @@ CREATE TABLE cards(
   valid_token VARCHAR(320) NOT NULL,
   block_list boolean 
 );
+
+
+CREATE TABLE keys(
+  id serial primary key,
+  authentication VARCHAR(320) NOT NULL,
+  signing VARCHAR(320) NOT NULL
+);
 ```
 
 
