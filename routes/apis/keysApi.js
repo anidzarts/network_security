@@ -2,36 +2,43 @@ import * as keysService from "../../services/keysServices.js";
 
 const blockCard = async({request, response}) => {
     const body = request.body();
-    const document = await body.value;
-    const name = document.get('name');
+    const params = await body.value;
+    const name = params.get('name');
     await keysService.changeItem(name);
     response.status = 200;
-    return response.send(''); 
+    return response.body = 'drtfygg'; 
 };
 
 const keysAuth = async({params, response}) => {
-    await keysService.getAuthKey(params.id);
+    const key = await keysService.getAuthKey(params.id);
     response.status = 200;
+    return response.body = key.authentication;
   };
 
-const keysSign = async({params, response}) => {
-    await keysService.getSigningKey(params.id);
-    response.status = 200;
-  };
 
   const cardsBlock = async({params, response}) => {
-    await keysService.cardsCheckBlock(params.id);
+    const key = await keysService.cardsCheckBlock(params.id);
     response.status = 200;
+    return response.body = key;
+    
 };
 
 const readersBlock = async({params, response}) => {
-    await keysService.readersCheckBlock(params.id);
+    const key = await keysService.readersCheckBlock(params.id);
     response.status = 200;
+    return response.body = key;
 };
 
-const keysValidSign = async({params, response}) => {
-    await keysService.getValidSigningKey(params.id);
+const keysSign = async({params, response}) => {
+    const key = await keysService.getSigningKey(params.id);
     response.status = 200;
+    return response.body = key.signing;
+  };
+
+const keysValidSign = async({params, response}) => {
+    const key = await keysService.getValidSigningKey(params.id);
+    response.status = 200;
+    return response.body = key.valid_signing;
   };
 
 
