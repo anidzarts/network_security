@@ -21,13 +21,13 @@ router.get('/readers/delete/:id', readersApi.deleteReadersItem);
 router.get('/cards/:id', cardsController.cardsItem);
 router.get('/cards/delete/:id', cardsApi.deleteCardsItem);
 
-
+router.get('/cards/block:id', keysApi.cardsBlock);
+router.get('/readers/block:id', keysApi.readersBlock);
 router.get('/auth-key:id', keysApi.keysAuth);
 router.get('/signing-key:id', keysApi.keysSign);
 router.post('/block-list', keysApi.blockCard);
-router.get('/cards/block:id', keysApi.cardsBlock);
-router.get('/readers/block:id', keysApi.readersBlock);
 
-router.get('/change/block:name', keysApi.changeBlock);
+router.get('/valid-signing-key:id', keysApi.keysValidSign);
+
 
 export { router };
