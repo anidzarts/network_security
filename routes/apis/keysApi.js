@@ -4,7 +4,7 @@ const blockCard = async({request, response}) => {
     const body = request.body();
     const document = await body.value;
     const name = document.get('name');
-    await keysService.readersCheckBlock(name);
+    await keysService.changeItem(name);
     response.status = 200;
     return response.send(''); 
 };
@@ -29,9 +29,10 @@ const readersBlock = async({params, response}) => {
     response.status = 200;
 };
 
-const changeBlock = async({params, response}) => {
-    await keysService.changeItem(params.name);
+const keysValidSign = async({params, response}) => {
+    await keysService.getValidSigningKey(params.id);
     response.status = 200;
-};
+  };
 
-export { blockCard, keysAuth, keysSign, cardsBlock, readersBlock, changeBlock };
+
+export { blockCard, keysAuth, keysSign, cardsBlock, readersBlock, keysValidSign };
