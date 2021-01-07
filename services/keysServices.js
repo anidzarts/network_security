@@ -56,7 +56,7 @@ const cardsCheckBlock = async(id) => {
 const readersCheckBlock = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0]) 
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0] == 'true')
     {
         return ('true');
     }
