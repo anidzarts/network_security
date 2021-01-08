@@ -68,8 +68,13 @@ const changeItem = async(name) => {
     const res = await executeQuery("SELECT * FROM cards WHERE name = $1", name);
     if (res && res.rowCount>0) {
         console.log(res)
+        console.log("HI")
+        console.log(res.rowsOfObjects()[0])
+        console.log(res.rowsOfObjects()[0]["id"])
+        
         //TODO get id from res to UPDATE
-        id = res.rowsOfObjects()[0].id
+        let id = res.rowsOfObjects()[0]["id"]
+        console.log(id)
         await executeQuery("UPDATE cards SET block_list ='true' WHERE id = $1",
         id);
     }
