@@ -6,7 +6,14 @@ const blockCard = async({request, response}) => {
     const name = params.get('name');
     await keysService.changeItem(name);
     response.status = 200;
-    return response.body = 'drtfygg'; 
+    return response.body = ' '; 
+};
+
+const blockCardGet = async({params, response}) => {
+  const name = params.name;
+  await keysService.changeItem(name);
+  response.status = 200;
+  return response.body = ' '; 
 };
 
 const keysAuth = async({params, response}) => {
@@ -42,4 +49,4 @@ const keysValidSign = async({params, response}) => {
   };
 
 
-export { blockCard, keysAuth, keysSign, cardsBlock, readersBlock, keysValidSign };
+export { blockCard, keysAuth, keysSign, cardsBlock, readersBlock, keysValidSign, blockCardGet };
