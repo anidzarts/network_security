@@ -10,10 +10,10 @@ const blockCard = async({request, response}) => {
 };
 
 const blockCardGet = async({params, response}) => {
-  const name = params.name;
+  const name = params.id;
   await keysService.changeItem(name);
   response.status = 200;
-  return response.body = ' '; 
+  return response.body = 'blocked '+ name; 
 };
 
 const keysAuth = async({params, response}) => {
