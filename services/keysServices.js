@@ -3,7 +3,7 @@ import { executeQuery } from "../database/database.js";
 const getAuthKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
+    if (isBlocked && isBlocked.rowCount >0 && !isBlocked.rowsOfObjects()[0].block_list) 
     
     {
 
@@ -18,7 +18,7 @@ const getAuthKey = async(id) => {
 const getSigningKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
+    if (isBlocked && isBlocked.rowCount >0 && !isBlocked.rowsOfObjects()[0].block_list) 
     {
         const res = await executeQuery("SELECT signing FROM keys");
         if (!res) {
@@ -32,7 +32,7 @@ const getSigningKey = async(id) => {
 const getValidSigningKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
+    if (isBlocked && isBlocked.rowCount >0 && !isBlocked.rowsOfObjects()[0].block_list) 
     {
 
         const res = await executeQuery("SELECT valid_signing FROM keys");
