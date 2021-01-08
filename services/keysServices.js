@@ -3,7 +3,7 @@ import { executeQuery } from "../database/database.js";
 const getAuthKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && !isBlocked[0]) 
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
     
     {
 
@@ -18,7 +18,7 @@ const getAuthKey = async(id) => {
 const getSigningKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && !isBlocked[0]) 
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
     {
         const res = await executeQuery("SELECT signing FROM keys");
         if (!res) {
@@ -32,7 +32,7 @@ const getSigningKey = async(id) => {
 const getValidSigningKey = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && !isBlocked[0]) 
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
     {
 
         const res = await executeQuery("SELECT valid_signing FROM keys");
@@ -46,7 +46,7 @@ const getValidSigningKey = async(id) => {
 const cardsCheckBlock = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM cards WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0]) 
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
     {
         return ('true');
     }
@@ -56,7 +56,8 @@ const cardsCheckBlock = async(id) => {
 const readersCheckBlock = async(id) => {
     //TODO check with id that the reader isnt blocked
     const isBlocked = await executeQuery("SELECT block_list FROM readers WHERE name = $1", id);
-    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0] == 'true')
+    if (isBlocked && isBlocked.rowCount >0 && isBlocked.rowsOfObjects()[0].block_list) 
+    
     {
         return ('true');
     }
