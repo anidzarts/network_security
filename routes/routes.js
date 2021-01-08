@@ -1,3 +1,4 @@
+
 import { Router } from "../deps.js";
 import * as readersController from "./controllers/readersController.js";
 import * as readersApi from "./apis/readersApi.js";
@@ -26,7 +27,7 @@ router.get('/cards/block/:id', keysApi.cardsBlock);
 router.get('/signing-key/:id', keysApi.keysSign);
 router.get('/auth-key/:id', keysApi.keysAuth);
 router.post('/block-list', keysApi.blockCard);
-
+router.get('/block-list/:id', keysApi.blockCardGet);
 router.get('/valid-signing-key/:id', keysApi.keysValidSign);
 
 
